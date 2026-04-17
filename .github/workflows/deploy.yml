@@ -7,15 +7,18 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4 # 升级了版本
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4 # 升级了版本
         with:
-          node-version: '18'
+          node-version: '22' # 适配最新的 Node 版本
+
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps # 强制解决依赖冲突
+
       - name: Build
         run: npm run build
+
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
